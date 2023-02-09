@@ -38,7 +38,7 @@
                 },
                 {
                     "name": "",
-                    "id": "9c98caa5-61ce-461a-b8ea-0955eb01ccb7",
+                    "id": "4ae6ff2d-3eb5-48bd-85ef-e80eb1e8085c",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -104,8 +104,8 @@
                 },
                 {
                     "name": "",
-                    "id": "16e909c4-1101-4bdb-a670-12098f722c24",
-                    "path": "<Gamepad>/leftStick",
+                    "id": "9edafeb4-5e73-4476-b347-230a1be8b094",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -123,7 +123,7 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 }
             ]
@@ -133,7 +133,7 @@
             "bindingGroup": "Controller",
             "devices": [
                 {
-                    "devicePath": "<XboxOneGamepadAndroid>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": true,
                     "isOR": false
                 }
