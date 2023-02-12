@@ -1,55 +1,116 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+
 public class PlayerController : MonoBehaviour
 {
+    //input fields
+    //private PlayerActionAsset playerActionsAsset;
+    private InputActionAsset inputAsset;
+    private InputActionMap player;
+    private InputAction move;
+
+    //movement fields
+    private Rigidbody rb;
     [SerializeField]
-    private float playerSpeed = 2.0f;
+    private float movementForce = 1f;
     [SerializeField]
-    private float jumpHeight = 1.0f;
+    private float jumpForce = 5f;
     [SerializeField]
-    private float gravityValue = -9.81f;
+    private float maxSpeed = 5f;
+    private Vector3 forceDirection = Vector3.zero;
 
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
+    [SerializeField]
+    private Camera playerCamera;
+    private Animator animator;
 
-    private Vector2 movementInput = Vector2.zero;
-    private bool jumped = false;
-
-    public void OnMove(InputAction.CallbackContext context) 
+    private void Awake()
     {
-        movementInput = context.ReadValue<Vector2>();
-    }
-    public void OnJump(InputAction.CallbackContext context) 
-    {
-        jumped = context.action.triggered;
+        rb = this.GetComponent<Rigidbody>();
+        inputAsset = this.GetComponent<PlayerInput>().actions;
+        player = inputAsset.FindActionMap("Player");
+        //playerActionsAsset = new PlayerActionAsset();
+        //animator = this.GetComponent<Animator>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        controller = gameObject.GetComponent<CharacterController>();
+        //playerActionsAsset.Player.Jump.started += DoJump;
+        //playerActionsAsset.Player.Attack.started += DoAttack;
+        //move = playerActionsAsset.Player.Movement;
+        //playerActionsAsset.Player.Enable();
+        player.FindAction("Jump").started += DoJump;
+        move = player.FindAction("Movement");
+        player.Enable();
     }
 
-    void Update()
+    private void OnDisable()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        //playerActionsAsset.Player.Jump.started -= DoJump;
+        //playerActionsAsset.Player.Attack.started -= DoAttack;
+        //playerActionsAsset.Player.Disable();
+        player.FindAction("Jump").started -= DoJump;
+        player.Disable();
+    }
+
+    private void FixedUpdate()
+    {
+        forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
+        forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
+
+        rb.AddForce(forceDirection, ForceMode.Impulse);
+        forceDirection = Vector3.zero;
+
+        if (rb.velocity.y < 0f)
+            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+
+        Vector3 horizontalVelocity = rb.velocity;
+        horizontalVelocity.y = 0;
+        if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
+            rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
+
+        LookAt();
+    }
+
+    private void LookAt()
+    {
+        Vector3 direction = rb.velocity;
+        direction.y = 0f;
+
+        if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
+            this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        else
+            rb.angularVelocity = Vector3.zero;
+    }
+
+    private Vector3 GetCameraForward(Camera playerCamera)
+    {
+        Vector3 forward = playerCamera.transform.forward;
+        forward.y = 0;
+        return forward.normalized;
+    }
+
+    private Vector3 GetCameraRight(Camera playerCamera)
+    {
+        Vector3 right = playerCamera.transform.right;
+        right.y = 0;
+        return right.normalized;
+    }
+
+    private void DoJump(InputAction.CallbackContext obj)
+    {
+        if (IsGrounded())
         {
-            playerVelocity.y = 0f;
+            forceDirection += Vector3.up * jumpForce;
         }
+    }
 
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        // Changes the height position of the player..
-        if (jumped && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+    private bool IsGrounded()
+    {
+        Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
+            return true;
+        else
+            return false;
     }
 }
