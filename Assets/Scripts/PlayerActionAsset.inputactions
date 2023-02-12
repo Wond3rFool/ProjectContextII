@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerActionAsset",
     "maps": [
         {
             "name": "Player",
@@ -18,6 +18,24 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "0dbaecf2-2297-4732-841f-6210b4d49b52",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "b7715e6a-60e8-466c-9c7c-80ea463e7857",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "8e6350de-2afc-4491-9ae0-18673de8f19c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -105,11 +123,55 @@
                 {
                     "name": "",
                     "id": "9edafeb4-5e73-4476-b347-230a1be8b094",
-                    "path": "<Gamepad>/dpad",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b333de2-9e84-4c6f-acd5-6d2c7792cce0",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50d76a35-5664-412b-8da3-b3184054980c",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2420baea-4760-4f7e-959e-61f4a8560d79",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7140cb92-bf06-46d8-8898-56cad634c941",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -124,6 +186,11 @@
                 {
                     "devicePath": "<Keyboard>",
                     "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
                     "isOR": false
                 }
             ]
