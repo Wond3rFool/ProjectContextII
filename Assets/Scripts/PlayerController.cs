@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
+    private InputAction interact;
 
     //movement fields
     private Rigidbody rb;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         //move = playerActionsAsset.Player.Movement;
         //playerActionsAsset.Player.Enable();
         player.FindAction("Jump").started += DoJump;
+        player.FindAction("Interact").started += NpcInteract;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Attack.started -= DoAttack;
         //playerActionsAsset.Player.Disable();
         player.FindAction("Jump").started -= DoJump;
+        player.FindAction("Interact").started -= NpcInteract;
         player.Disable();
     }
 
@@ -103,6 +106,23 @@ public class PlayerController : MonoBehaviour
         {
             forceDirection += Vector3.up * jumpForce;
         }
+    }
+
+    private void NpcInteract(InputAction.CallbackContext obj) 
+    {
+        float interactRange = 5f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in colliders) 
+        {
+            Debug.Log(collider);
+            if (collider.TryGetComponent(out NpcInteractable npc)) 
+            {
+
+                npc.Interact();
+            }
+
+        }
+
     }
 
     private bool IsGrounded()
