@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb = this.GetComponent<Rigidbody>();
-        inputAsset = this.GetComponent<PlayerInput>().actions;
+        rb = GetComponent<Rigidbody>();
+        inputAsset = GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
@@ -74,14 +74,13 @@ public class PlayerController : MonoBehaviour
 
         LookAt();
     }
-
     private void LookAt()
     {
         Vector3 direction = rb.velocity;
         direction.y = 0f;
 
         if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
-            this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
         else
             rb.angularVelocity = Vector3.zero;
     }
@@ -120,9 +119,7 @@ public class PlayerController : MonoBehaviour
 
                 npc.Interact();
             }
-
         }
-
     }
 
     private bool IsGrounded()
