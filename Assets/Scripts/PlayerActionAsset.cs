@@ -62,6 +62,15 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""65421823-abbe-4998-afa9-5757eea4baf1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,28 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                     ""action"": ""Join"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bcd0466-9cd2-487e-88a1-061d7d18a44f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6236f0aa-dae3-4439-9930-dcc4c858b2a0"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -236,6 +267,7 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Join = m_Player.FindAction("Join", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -299,6 +331,7 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Join;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerActionAsset m_Wrapper;
@@ -307,6 +340,7 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Join => m_Wrapper.m_Player_Join;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -328,6 +362,9 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                 @Join.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
                 @Join.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
                 @Join.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -344,6 +381,9 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                 @Join.started += instance.OnJoin;
                 @Join.performed += instance.OnJoin;
                 @Join.canceled += instance.OnJoin;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -372,5 +412,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnJoin(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

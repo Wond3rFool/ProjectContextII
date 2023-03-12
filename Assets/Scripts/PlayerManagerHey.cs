@@ -32,6 +32,7 @@ public class PlayerManagerHey : MonoBehaviour
 
         //need to use the parent due to the structure of the prefab
         Transform playerParent = player.transform.parent;
+        playerParent.gameObject.tag = "Player" + players.Count;
         playerParent.position = startingPoints[players.Count - 1].position;
 
         //convert layer mask (bit) to an integer 

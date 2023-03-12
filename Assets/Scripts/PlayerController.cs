@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
+    private InputAction interact;
 
     //movement fields
     private Rigidbody rb;
@@ -26,8 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb = this.GetComponent<Rigidbody>();
-        inputAsset = this.GetComponent<PlayerInput>().actions;
+        rb = GetComponent<Rigidbody>();
+        inputAsset = GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         //move = playerActionsAsset.Player.Movement;
         //playerActionsAsset.Player.Enable();
         player.FindAction("Jump").started += DoJump;
+        player.FindAction("Interact").started += NpcInteract;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Attack.started -= DoAttack;
         //playerActionsAsset.Player.Disable();
         player.FindAction("Jump").started -= DoJump;
+        player.FindAction("Interact").started -= NpcInteract;
         player.Disable();
     }
 
@@ -71,14 +74,13 @@ public class PlayerController : MonoBehaviour
 
         LookAt();
     }
-
     private void LookAt()
     {
         Vector3 direction = rb.velocity;
         direction.y = 0f;
 
         if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
-            this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
         else
             rb.angularVelocity = Vector3.zero;
     }
@@ -102,6 +104,21 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded())
         {
             forceDirection += Vector3.up * jumpForce;
+        }
+    }
+
+    private void NpcInteract(InputAction.CallbackContext obj) 
+    {
+        float interactRange = 5f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in colliders) 
+        {
+            Debug.Log(collider);
+            if (collider.TryGetComponent(out NpcInteractable npc)) 
+            {
+
+                npc.Interact();
+            }
         }
     }
 
