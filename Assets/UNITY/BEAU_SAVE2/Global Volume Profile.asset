@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.92499065, y: 0.5920129, z: 1, w: 0.14976858}
+    m_Value: {x: 0.6138346, y: 0.5431809, z: 1, w: 0.14976858}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 0.97535515, z: 0.9777941, w: -0.05560704}
@@ -115,10 +115,10 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {r: 0.63997805, g: 0.4269313, b: 0.735849, a: 1}
+    m_Value: {r: 0.53831035, g: 0.23389105, b: 0.6792453, a: 1}
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 0.8679245, g: 0.61951965, b: 0.48718405, a: 1}
+    m_Value: {r: 0.4669811, g: 1, b: 0.8389143, a: 1}
   balance:
     m_OverrideState: 1
     m_Value: 0
@@ -228,6 +228,7 @@ MonoBehaviour:
   dirtTexture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
+    dimension: 1
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
