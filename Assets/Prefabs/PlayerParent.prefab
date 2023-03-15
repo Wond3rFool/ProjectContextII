@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecenterTarget: 1
   m_VerticalAxis:
-    Value: 5.19844
+    Value: 4.084067
     m_SpeedMode: 1
     m_MaxSpeed: 0.03
     m_AccelTime: 0.2
@@ -127,9 +127,9 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
-    Value: 1.0281372
+    Value: 12.797607
     m_SpeedMode: 1
-    m_MaxSpeed: 0.08
+    m_MaxSpeed: 0.3
     m_AccelTime: 0.2
     m_DecelTime: 0.2
     m_InputAxisName: Mouse X
@@ -175,7 +175,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3501859718054362381}
-  m_LocalRotation: {x: 0.00000003410969, y: 0.984211, z: -0.17699915, w: 0.00000019092113}
+  m_LocalRotation: {x: 0.000000030267987, y: 0.9842105, z: -0.17700191, w: 0.00000005960465}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -255,8 +255,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4125502658752242527}
-  m_LocalRotation: {x: 0.045347564, y: 0.008962839, z: -0.00040687787, w: 0.998931}
-  m_LocalPosition: {x: -0.10479497, y: 2.8032675, z: -5.8393617}
+  m_LocalRotation: {x: 0.03541068, y: 0.11137741, z: -0.0039711953, w: 0.99313915}
+  m_LocalPosition: {x: -1.2964573, y: 2.6895509, z: -5.7074814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -379,8 +379,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515287625546753403}
-  m_LocalRotation: {x: 0.045347564, y: 0.008962839, z: -0.00040687787, w: 0.998931}
-  m_LocalPosition: {x: -0.10479497, y: 2.8032675, z: -5.8393617}
+  m_LocalRotation: {x: 0.03541068, y: 0.11137741, z: -0.0039711953, w: 0.99313915}
+  m_LocalPosition: {x: -1.2964573, y: 2.6895509, z: -5.7074814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementForce: 1
   jumpForce: 5.12
-  maxSpeed: 5.82
+  maxSpeed: 6
   playerCamera: {fileID: 8515287625546753407}
 --- !u!54 &227065713438247259
 Rigidbody:
