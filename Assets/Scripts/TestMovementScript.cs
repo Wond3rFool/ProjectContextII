@@ -14,8 +14,7 @@ public class TestMovementScript : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 5f;
 
-    [SerializeField]
-    private Transform playerCamera;
+    private Transform cameraTransform;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -52,6 +51,7 @@ public class TestMovementScript : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        cameraTransform = transform.parent.GetComponentInChildren<Camera>().transform;
     }
 
     void Update()
@@ -62,25 +62,30 @@ public class TestMovementScript : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+
         Vector2 moveInput = move.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y);
-        movement = playerCamera.forward * movement.z + playerCamera.right * movement.x;
+
+        Vector3 movement = new Vector3(moveInput.x, 0f, moveInput.y);
+
+        movement = movement.x * cameraTransform.right.normalized + movement.z * cameraTransform.forward.normalized;
+
         movement.y = 0f;
         controller.Move(movement * Time.deltaTime * playerSpeed);
-        
+
         if (movement != Vector3.zero)
         {
-            gameObject.transform.forward = movement;
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(movement), 0.15f);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if (moveInput != Vector2.zero) 
+        if (moveInput != Vector2.zero)
         {
-            float targetAngle = Mathf.Atan2(moveInput.y, movement.y) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            float targetAngle = cameraTransform.eulerAngles.y;
             Quaternion rotation = Quaternion.Euler(0, targetAngle, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, Time.deltaTime * rotationSpeed);
+            print(targetAngle);
         }
     }
 
@@ -95,7 +100,6 @@ public class TestMovementScript : MonoBehaviour
             Debug.Log(collider);
             if (collider.TryGetComponent(out NpcInteractable npc))
             {
-
                 npc.Interact();
             }
         }
