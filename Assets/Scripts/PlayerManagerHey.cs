@@ -11,6 +11,8 @@ public class PlayerManagerHey : MonoBehaviour
     private List<Transform> startingPoints;
     [SerializeField]
     private List<LayerMask> playerLayers;
+    [SerializeField]
+    private Canvas canvasToAssign;
 
     private PlayerInputManager playerInputManager;
 
@@ -30,6 +32,7 @@ public class PlayerManagerHey : MonoBehaviour
     {
         players.Add(player);
 
+        Canvas canvasToPlace = Instantiate(canvasToAssign);
         //need to use the parent due to the structure of the prefab
         Transform playerParent = player.transform.parent;
         playerParent.gameObject.tag = "Player" + players.Count;
@@ -43,6 +46,9 @@ public class PlayerManagerHey : MonoBehaviour
         //add the layer
         playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
         //set the action in the custom cinemachine Input Handler
+        canvasToPlace.worldCamera = playerParent.GetComponentInChildren<Camera>();
+        canvasToPlace.planeDistance = 1f;
+
         playerParent.GetComponentInChildren<CinemachineInputHandler>().look = player.actions.FindAction("Look");
 
     }
