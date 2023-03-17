@@ -14,12 +14,12 @@ public class ChatBubble : MonoBehaviour
     }
 
     private SpriteRenderer background;
-    private TMP_Text text;
+    private TextMeshPro text;
 
     private void Awake()
     {
         background = GetComponentInChildren<SpriteRenderer>();
-        text = GetComponentInChildren<TMP_Text>();
+        text = GetComponentInChildren<TextMeshPro>();
     }
     private void Setup(string _text) 
     {
@@ -30,5 +30,7 @@ public class ChatBubble : MonoBehaviour
 
         Vector2 padding = new Vector2(1.5f, 0.75f);
         background.size = textSize + padding;
+
+        TextWriter.AddWriter_Static(text, _text, .05f, true, false, () => { });
     }
 }
