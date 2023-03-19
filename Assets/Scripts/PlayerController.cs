@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Enable();
         player.FindAction("Jump").started += DoJump;
         player.FindAction("Interact").started += NpcInteract;
-        player.FindAction("InteractEnviremont") += EnviremontInteract;
+        player.FindAction("InteractEnviremont").started += EnviremontInteract;
         move = player.FindAction("Movement");
         player.Enable();
     }
