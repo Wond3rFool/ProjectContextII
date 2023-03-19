@@ -16,6 +16,9 @@ public class PlayerManagerHey : MonoBehaviour
 
     private PlayerInputManager playerInputManager;
 
+    public static bool player1Interact = false;
+    public static bool player2Interact = false;
+
     private void Awake()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
