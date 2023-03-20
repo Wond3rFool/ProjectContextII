@@ -19,7 +19,11 @@ public class EnvironmentInteract : MonoBehaviour
         if (PlayerManagerHey.player1Interact && PlayerManagerHey.player2Interact) 
         {
             //Play Animation;
-            Debug.Log("Play animation");
+            PlayerManagerHey.player1Interact = false;
+            PlayerManagerHey.player2Interact = false;
+
+            animator.Play("GateOpen");
+            Debug.Log("played animation");
             foreach (Collider col in colliders) 
             {
                 col.isTrigger = true;
