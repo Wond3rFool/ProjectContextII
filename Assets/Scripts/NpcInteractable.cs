@@ -24,7 +24,6 @@ public class NpcInteractable : MonoBehaviour
             if (collider.TryGetComponent(out PlayerController player))
             {
                 transform.LookAt(player.transform.position);
-                
             }
 
         }
