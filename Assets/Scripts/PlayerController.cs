@@ -131,8 +131,17 @@ public class PlayerController : MonoBehaviour
         {
             if (col.TryGetComponent(out EnvironmentInteract env)) 
             {
-                if (gameObject.tag == "Player1") PlayerManagerHey.player1Interact = true;
-                else if (gameObject.tag == "Player2") PlayerManagerHey.player2Interact = true;
+                if (gameObject.transform.parent.tag == "Player1")
+                {
+                    PlayerManagerHey.player1Interact = true;
+                    Debug.Log("palyer 1 test");
+                }
+
+                else if (gameObject.transform.parent.tag == "Player2") 
+                {
+                    PlayerManagerHey.player2Interact = true;
+                    Debug.Log("palyer 2 test");
+                } 
                 else 
                 {
                     Debug.Log("No tags assigned");
