@@ -26,7 +26,7 @@ public class EnvironmentInteract : MonoBehaviour
             Debug.Log("played animation");
             foreach (Collider col in colliders) 
             {
-                col.isTrigger = true;
+                col.GetComponent<Collider>().enabled = false;
             }
 
         }
