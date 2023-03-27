@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652016662417281035}
-  m_LocalRotation: {x: 0.00000003410969, y: 0.984211, z: -0.17699915, w: 0.00000019092113}
+  m_LocalRotation: {x: 0.0000000134750735, y: 0.984211, z: -0.1769992, w: 0.000000404194}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -104,8 +104,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2248567754616655449}
-  m_LocalRotation: {x: 0.045347564, y: 0.008962839, z: -0.00040687787, w: 0.998931}
-  m_LocalPosition: {x: -0.10479736, y: 2.8032675, z: -5.8393593}
+  m_LocalRotation: {x: 0.043617725, y: 0.00871823, z: -0.00038064612, w: 0.9990102}
+  m_LocalPosition: {x: -0.10197067, y: 2.7830358, z: -5.841812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -306,11 +306,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecenterTarget: 1
   m_VerticalAxis:
-    Value: 5.19844
-    m_SpeedMode: 1
-    m_MaxSpeed: 0.03
-    m_AccelTime: 0.2
-    m_DecelTime: 0.2
+    Value: 5
+    m_SpeedMode: 0
+    m_MaxSpeed: 20
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 1
@@ -330,11 +330,11 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
-    Value: 1.0281372
-    m_SpeedMode: 1
-    m_MaxSpeed: 0.5
-    m_AccelTime: 0.2
-    m_DecelTime: 0.2
+    Value: 1
+    m_SpeedMode: 0
+    m_MaxSpeed: 75
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -413,8 +413,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5789480950852733053}
-  m_LocalRotation: {x: 0.045347564, y: 0.008962839, z: -0.00040687787, w: 0.998931}
-  m_LocalPosition: {x: -0.10479736, y: 2.8032675, z: -5.8393593}
+  m_LocalRotation: {x: 0.043617725, y: 0.00871823, z: -0.00038064612, w: 0.9990102}
+  m_LocalPosition: {x: -0.10197067, y: 2.7830358, z: -5.841812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -667,6 +667,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 65421823-abbe-4998-afa9-5757eea4baf1
     m_ActionName: Player/Interact[/Keyboard/e,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7bc0a1e8-a5b9-4033-a2ad-261dce783a87
+    m_ActionName: Player/InteractEnviremont[/Keyboard/q,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
@@ -699,8 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementForce: 1
-  jumpForce: 5.12
-  maxSpeed: 5.82
+  jumpForce: 5
+  maxSpeed: 6
   playerCamera: {fileID: 5789480950852733049}
 --- !u!54 &2689367692059731037
 Rigidbody:
