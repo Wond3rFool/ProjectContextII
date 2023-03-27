@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Enable();
         player.FindAction("Jump").started += DoJump;
         player.FindAction("Interact").started += NpcInteract;
-        player.FindAction("InteractEnviremont").started += EnviremontInteract;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -114,41 +113,13 @@ public class PlayerController : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders) 
         {
-            //Debug.Log(collider);
+            Debug.Log(collider);
             if (collider.TryGetComponent(out NpcInteractable npc)) 
             {
+
                 npc.Interact();
             }
         }
-    }
-
-    private void EnviremontInteract(InputAction.CallbackContext obj) 
-    {
-        float environmentRange = 5f;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, environmentRange);
-
-        foreach (Collider col in colliders)
-        {
-            if (col.TryGetComponent(out EnvironmentInteract env)) 
-            {
-                if (gameObject.transform.parent.tag == "Player1")
-                {
-                    PlayerManagerHey.player1Interact = true;
-                    Debug.Log("palyer 1 test");
-                }
-
-                else if (gameObject.transform.parent.tag == "Player2") 
-                {
-                    PlayerManagerHey.player2Interact = true;
-                    Debug.Log("palyer 2 test");
-                } 
-                else 
-                {
-                    Debug.Log("No tags assigned");
-                }
-            }
-        }
-    
     }
 
     private bool IsGrounded()

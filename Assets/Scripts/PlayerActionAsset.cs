@@ -71,15 +71,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""InteractEnviremont"",
-                    ""type"": ""Button"",
-                    ""id"": ""7bc0a1e8-a5b9-4033-a2ad-261dce783a87"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,28 +227,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dad69193-9999-471a-83f7-8003cb39c2f9"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""InteractEnviremont"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e94d41c4-959e-4f2a-a618-99ae28a885ae"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""InteractEnviremont"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -299,7 +268,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Join = m_Player.FindAction("Join", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_InteractEnviremont = m_Player.FindAction("InteractEnviremont", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -364,7 +332,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Join;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_InteractEnviremont;
     public struct PlayerActions
     {
         private @PlayerActionAsset m_Wrapper;
@@ -374,7 +341,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Join => m_Wrapper.m_Player_Join;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @InteractEnviremont => m_Wrapper.m_Player_InteractEnviremont;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -399,9 +365,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @InteractEnviremont.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractEnviremont;
-                @InteractEnviremont.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractEnviremont;
-                @InteractEnviremont.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractEnviremont;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -421,9 +384,6 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @InteractEnviremont.started += instance.OnInteractEnviremont;
-                @InteractEnviremont.performed += instance.OnInteractEnviremont;
-                @InteractEnviremont.canceled += instance.OnInteractEnviremont;
             }
         }
     }
@@ -453,6 +413,5 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnJoin(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnInteractEnviremont(InputAction.CallbackContext context);
     }
 }

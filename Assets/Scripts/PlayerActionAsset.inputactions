@@ -49,15 +49,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "InteractEnviremont",
-                    "type": "Button",
-                    "id": "7bc0a1e8-a5b9-4033-a2ad-261dce783a87",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -212,28 +203,6 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dad69193-9999-471a-83f7-8003cb39c2f9",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "InteractEnviremont",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e94d41c4-959e-4f2a-a618-99ae28a885ae",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "InteractEnviremont",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
