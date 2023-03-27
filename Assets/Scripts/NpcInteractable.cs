@@ -6,13 +6,15 @@ public class NpcInteractable : MonoBehaviour
 {
     private float interactRange;
 
+    public string textToWrite;
+
     private void Awake()
     {
         interactRange = 8f;
     }
     public void Interact() 
     {
-       ChatBubble.Create(transform.transform, new Vector3(-.3f, 1.7f, 0f), "Hello there");
+       ChatBubble.Create(transform.transform, new Vector3(-.3f, 1.7f, 0f), textToWrite);
     }
 
     public void Update()
