@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputAsset = GetComponent<PlayerInput>().actions;
+        animator = GetComponent<Animator>();
         player = inputAsset.FindActionMap("Player");
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Enable();
         player.FindAction("Jump").started += DoJump;
         player.FindAction("Interact").started += NpcInteract;
+        player.FindAction("Environment").started += EnvironmentInteract;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Disable();
         player.FindAction("Jump").started -= DoJump;
         player.FindAction("Interact").started -= NpcInteract;
+        player.FindAction("Environment").started -= EnvironmentInteract;
         player.Disable();
     }
 
@@ -60,6 +63,16 @@ public class PlayerController : MonoBehaviour
     {
         forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
         forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
+
+        if (move.ReadValue<Vector2>() != Vector2.zero)
+        {
+            animator.Play("PlayerWalk");
+        }
+        else
+        {
+            Debug.Log("test");
+            animator.Play("PlayerIdle");
+        }
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
@@ -122,11 +135,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void EnvironmentInteract(InputAction.CallbackContext obj) 
+    {
+        float interactRange = 5f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in colliders)
+        {
+            Debug.Log("envirenoment");
+            if (collider.TryGetComponent(out EnvironmentInteract npc))
+            {
+                Debug.Log(gameObject.transform.parent.tag);
+                if (gameObject.transform.parent.tag == "Player1")
+                {
+
+                    PlayerManagerHey.player1Interact = true;
+                    npc.nearMe1 = true;
+                }
+                else if (gameObject.transform.parent.tag == "Player2") 
+                {
+                    PlayerManagerHey.player2Interact = true;
+                    npc.nearMe2 = true;
+                }
+            }
+        }
+    }
+
     private bool IsGrounded()
     {
         Debug.Log("hello");
         Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.51f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.51f)) 
             return true;
         else
             return false;

@@ -10,7 +10,7 @@ public class NpcInteractable : MonoBehaviour
 
     private void Awake()
     {
-        interactRange = 8f;
+        interactRange = 6f;
     }
     public void Interact() 
     {
