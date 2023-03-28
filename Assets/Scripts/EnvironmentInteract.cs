@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnvironmentInteract : MonoBehaviour
 {
-    Collider[] colliders;
+    TextMeshPro text;
     Animator animator;
+
+    private float interactRange = 18f;
 
     public bool nearMe1 = false;
     public bool nearMe2 = false;
     // Start is called before the first frame update
     void Start()
     {
-        colliders = GetComponents<Collider>();
-        animator= GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        text = GetComponentInChildren<TextMeshPro>();
+        text.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -29,9 +33,18 @@ public class EnvironmentInteract : MonoBehaviour
 
             animator.Play("GateOpen");
             Debug.Log("played animation");
-            foreach (Collider col in colliders) 
+        }
+
+        Collider[] collidersInRange = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in collidersInRange)
+        {
+            if (collider.TryGetComponent(out PlayerController player))
             {
-                col.GetComponent<Collider>().enabled = false;
+                text.gameObject.SetActive(true);
+            }
+            else 
+            {
+                text.gameObject.SetActive(false);
             }
 
         }

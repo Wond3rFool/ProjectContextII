@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
     private void NpcInteract(InputAction.CallbackContext obj) 
     {
-        float interactRange = 5f;
+        float interactRange = 7f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         if (canvas.gameObject.activeInHierarchy)
         {
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
     private void EnvironmentInteract(InputAction.CallbackContext obj) 
     {
-        float interactRange = 5f;
+        float interactRange = 7f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders)
         {

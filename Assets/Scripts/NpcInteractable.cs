@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NpcInteractable : MonoBehaviour
@@ -10,9 +11,14 @@ public class NpcInteractable : MonoBehaviour
 
     public string[] lines;
 
+    private TextMeshPro text;
+
+    private bool interactable = false;
+
     private void Awake()
     {
-        interactRange = 6f;
+        interactRange = 16f;
+        text = GetComponentInChildren<TextMeshPro>();
     }
     public void Interact(Canvas canvas) 
     {
@@ -24,6 +30,7 @@ public class NpcInteractable : MonoBehaviour
             {
                 canvas.gameObject.SetActive(true);
                 player.FillArray(lines.Length, lines);
+                interactable = true;
                 //player.GetComponentInChildren<Dialogue>().lines = lines;
             }
         }
@@ -35,11 +42,14 @@ public class NpcInteractable : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders)
         {
-            //Debug.Log(collider);
-            if (collider.TryGetComponent(out PlayerController player))
+            if (collider.TryGetComponent(out PlayerController player) && !interactable)
             {
                 transform.LookAt(player.transform.position);
-                
+                text.gameObject.SetActive(true);
+            }
+            else 
+            {
+                text.gameObject.SetActive(false);
             }
 
         }
