@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         inputAsset = GetComponent<PlayerInput>().actions;
         animator = GetComponent<Animator>();
-        canvas = GetComponent<Canvas>();
+        canvas = GetComponentInChildren<Canvas>();
         player = inputAsset.FindActionMap("Player");
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
@@ -148,7 +148,6 @@ public class PlayerController : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders)
         {
-            Debug.Log("envirenoment");
             if (collider.TryGetComponent(out EnvironmentInteract npc))
             {
                 Debug.Log(gameObject.transform.parent.tag);

@@ -20,9 +20,10 @@ public class NpcInteractable : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders)
         {
-            if (collider.TryGetComponent(out Dialogue text)) 
+            if (collider.TryGetComponent(out PlayerController player)) 
             {
-                text.lines = lines;
+                player.GetComponent<Canvas>().gameObject.SetActive(true);
+                player.GetComponentInChildren<Dialogue>().lines = lines;
             }
         }
 
