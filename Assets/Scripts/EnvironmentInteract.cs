@@ -19,7 +19,7 @@ public class EnvironmentInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerManagerHey.player1Interact && PlayerManagerHey.player2Interact && nearMe) 
+        if (PlayerManagerHey.player1Interact && PlayerManagerHey.player2Interact && nearMe1 && nearMe2) 
         {
             //Play Animation;
             PlayerManagerHey.player1Interact = false;

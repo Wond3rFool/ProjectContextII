@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
-    private InputAction interact;
 
     //movement fields
     private Rigidbody rb;
@@ -24,12 +23,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera playerCamera;
     private Animator animator;
+    private Canvas canvas;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         inputAsset = GetComponent<PlayerInput>().actions;
         animator = GetComponent<Animator>();
+        canvas = GetComponent<Canvas>();
         player = inputAsset.FindActionMap("Player");
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
@@ -64,13 +65,12 @@ public class PlayerController : MonoBehaviour
         forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
         forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
 
-        if (move.ReadValue<Vector2>() != Vector2.zero)
+        if (forceDirection != Vector3.zero)
         {
             animator.Play("PlayerWalk");
         }
         else
         {
-            Debug.Log("test");
             animator.Play("PlayerIdle");
         }
 
@@ -124,15 +124,22 @@ public class PlayerController : MonoBehaviour
     {
         float interactRange = 5f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
-        foreach (Collider collider in colliders) 
+        if (canvas.gameObject.activeInHierarchy)
         {
-            Debug.Log(collider);
-            if (collider.TryGetComponent(out NpcInteractable npc)) 
-            {
 
-                npc.Interact();
+        }
+        else 
+        {
+            foreach (Collider collider in colliders)
+            {
+                Debug.Log(collider);
+                if (collider.TryGetComponent(out NpcInteractable npc))
+                {
+                    npc.Interact();
+                }
             }
         }
+
     }
 
     private void EnvironmentInteract(InputAction.CallbackContext obj) 
