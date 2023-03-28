@@ -14,7 +14,7 @@ public class NpcInteractable : MonoBehaviour
     {
         interactRange = 6f;
     }
-    public void Interact() 
+    public void Interact(Canvas canvas) 
     {
         //ChatBubble.Create(transform.transform, new Vector3(-.3f, 1.7f, 0f), textToWrite);
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
@@ -22,8 +22,9 @@ public class NpcInteractable : MonoBehaviour
         {
             if (collider.TryGetComponent(out PlayerController player)) 
             {
-                player.GetComponent<Canvas>().gameObject.SetActive(true);
-                player.GetComponentInChildren<Dialogue>().lines = lines;
+                canvas.gameObject.SetActive(true);
+                player.FillArray(lines.Length, lines);
+                //player.GetComponentInChildren<Dialogue>().lines = lines;
             }
         }
 
