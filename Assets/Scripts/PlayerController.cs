@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
-    private InputAction interact;
 
     //movement fields
     private Rigidbody rb;
@@ -24,11 +23,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera playerCamera;
     private Animator animator;
+    private Canvas canvas;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         inputAsset = GetComponent<PlayerInput>().actions;
+        animator = GetComponent<Animator>();
+        canvas = GetComponent<Canvas>();
         player = inputAsset.FindActionMap("Player");
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Enable();
         player.FindAction("Jump").started += DoJump;
         player.FindAction("Interact").started += NpcInteract;
+        player.FindAction("Environment").started += EnvironmentInteract;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
         //playerActionsAsset.Player.Disable();
         player.FindAction("Jump").started -= DoJump;
         player.FindAction("Interact").started -= NpcInteract;
+        player.FindAction("Environment").started -= EnvironmentInteract;
         player.Disable();
     }
 
@@ -60,6 +64,15 @@ public class PlayerController : MonoBehaviour
     {
         forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
         forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
+
+        if (forceDirection != Vector3.zero)
+        {
+            animator.Play("PlayerWalk");
+        }
+        else
+        {
+            animator.Play("PlayerIdle");
+        }
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
@@ -111,21 +124,54 @@ public class PlayerController : MonoBehaviour
     {
         float interactRange = 5f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
-        foreach (Collider collider in colliders) 
+        if (canvas.gameObject.activeInHierarchy)
         {
-            Debug.Log(collider);
-            if (collider.TryGetComponent(out NpcInteractable npc)) 
-            {
 
-                npc.Interact();
+        }
+        else 
+        {
+            foreach (Collider collider in colliders)
+            {
+                Debug.Log(collider);
+                if (collider.TryGetComponent(out NpcInteractable npc))
+                {
+                    npc.Interact();
+                }
+            }
+        }
+
+    }
+
+    private void EnvironmentInteract(InputAction.CallbackContext obj) 
+    {
+        float interactRange = 5f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in colliders)
+        {
+            Debug.Log("envirenoment");
+            if (collider.TryGetComponent(out EnvironmentInteract npc))
+            {
+                Debug.Log(gameObject.transform.parent.tag);
+                if (gameObject.transform.parent.tag == "Player1")
+                {
+
+                    PlayerManagerHey.player1Interact = true;
+                    npc.nearMe1 = true;
+                }
+                else if (gameObject.transform.parent.tag == "Player2") 
+                {
+                    PlayerManagerHey.player2Interact = true;
+                    npc.nearMe2 = true;
+                }
             }
         }
     }
 
     private bool IsGrounded()
     {
-        Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
+        Debug.Log("hello");
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.51f)) 
             return true;
         else
             return false;

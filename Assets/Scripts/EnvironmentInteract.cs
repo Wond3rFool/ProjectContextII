@@ -6,6 +6,9 @@ public class EnvironmentInteract : MonoBehaviour
 {
     Collider[] colliders;
     Animator animator;
+
+    public bool nearMe1 = false;
+    public bool nearMe2 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,17 +19,19 @@ public class EnvironmentInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerManagerHey.player1Interact && PlayerManagerHey.player2Interact) 
+        if (PlayerManagerHey.player1Interact && PlayerManagerHey.player2Interact && nearMe1 && nearMe2) 
         {
             //Play Animation;
             PlayerManagerHey.player1Interact = false;
             PlayerManagerHey.player2Interact = false;
+            nearMe1 = false;
+            nearMe2 = false;
 
             animator.Play("GateOpen");
             Debug.Log("played animation");
             foreach (Collider col in colliders) 
             {
-                col.isTrigger = true;
+                col.GetComponent<Collider>().enabled = false;
             }
 
         }
