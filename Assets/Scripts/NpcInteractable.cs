@@ -44,7 +44,7 @@ public class NpcInteractable : MonoBehaviour
         {
             if (collider.TryGetComponent(out PlayerController player) && !interactable)
             {
-                transform.LookAt(player.transform.position);
+                transform.LookAt(new Vector3(player.transform.position.x, 0, player.transform.position.z / 2));
                 text.gameObject.SetActive(true);
             }
             else 
