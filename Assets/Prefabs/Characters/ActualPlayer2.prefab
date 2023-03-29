@@ -3246,9 +3246,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.03
-  m_Height: 0.13
+  m_Height: 0.1
   m_Direction: 1
-  m_Center: {x: 0, y: 0.06, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!95 &4812067958980228847
 Animator:
   serializedVersion: 4
@@ -3924,8 +3924,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 5, z: 1}
-  m_Center: {x: 0, y: 3.03, z: 0}
+  m_Size: {x: 2, y: 1.55, z: 1}
+  m_Center: {x: 0, y: 5.04, z: 0}
 --- !u!1 &7203876445675150332
 GameObject:
   m_ObjectHideFlags: 0
@@ -4593,6 +4593,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 65421823-abbe-4998-afa9-5757eea4baf1
     m_ActionName: Player/Interact[/Keyboard/e,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 568a6838-9d71-469b-9ae3-a8578a7a4467
+    m_ActionName: Player/Environment[/Keyboard/q,/SwitchProControllerHID/buttonWest,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
