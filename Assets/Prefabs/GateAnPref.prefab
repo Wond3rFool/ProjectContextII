@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 3737844377330667522}
   - component: {fileID: 3737844377330667521}
   - component: {fileID: 3737844377330667523}
+  - component: {fileID: 4064768545372306937}
   m_Layer: 0
   m_Name: GateAnPref
   m_TagString: Untagged
@@ -524,6 +525,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearMe1: 0
   nearMe2: 0
+--- !u!114 &4064768545372306937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4548095186373274974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ea286bf9cc75d4ab4c97c43cf6411e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: -2
 --- !u!1 &6988923181129325066
 GameObject:
   m_ObjectHideFlags: 0
