@@ -10,17 +10,17 @@ public class SceneSwitcher : MonoBehaviour
 
     public static void SwitchToEnd(int score)
     {
-        if (PlayerManagerHey.score >= 10)
+        if (PlayerManagerHey.score >= 5)
         {
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene(4);
         }
         else if (PlayerManagerHey.score <= 0)
         {
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene(3);
         }
         else 
         {
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene(5);
         }
     
     }

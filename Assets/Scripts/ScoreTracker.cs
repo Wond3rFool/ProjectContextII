@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScoreTracker : MonoBehaviour
 {
     private HashSet<GameObject> triggeredObjects = new HashSet<GameObject>();
-    public int score;
+    public float score;
 
     private void OnTriggerEnter(Collider other)
     {

@@ -17,7 +17,7 @@ public class PlayerManagerHey : MonoBehaviour
     public static bool player1Interact = false;
     public static bool player2Interact = false;
 
-    public static int score = 0;
+    public static float score = 0;
 
     private void Awake()
     {
