@@ -8,13 +8,13 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public static void SwitchToEnd(int score)
+    public static void SwitchToEnd(float score)
     {
         if (PlayerManagerHey.score >= 5)
         {
             SceneManager.LoadScene(4);
         }
-        else if (PlayerManagerHey.score <= 0)
+        else if (PlayerManagerHey.score <= -5)
         {
             SceneManager.LoadScene(3);
         }
