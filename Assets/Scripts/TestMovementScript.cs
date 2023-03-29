@@ -96,7 +96,7 @@ public class TestMovementScript : MonoBehaviour
             if (collider.TryGetComponent(out NpcInteractable npc))
             {
 
-                npc.Interact();
+               // npc.Interact();
             }
         }
     }

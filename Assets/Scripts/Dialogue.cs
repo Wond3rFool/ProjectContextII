@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI text;
+    public GameObject child;
+    public GameObject _camera;
     public string[] lines;
     public float textSpeed;
 
+    private bool theEnd = false;
+    private float timer = 4.5f;
     private int index;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +36,16 @@ public class Dialogue : MonoBehaviour
             {
                 StopAllCoroutines();
                 text.text = lines[index];
+            }
+        }
+        if (theEnd) 
+        {
+            Debug.Log(timer);
+            timer -= Time.deltaTime;
+            if (timer < 0) 
+            {
+                
+                SceneManager.LoadScene("0");
             }
         }
     }
@@ -57,7 +73,9 @@ public class Dialogue : MonoBehaviour
         }
         else 
         {
-            gameObject.SetActive(false);
+            child.gameObject.SetActive(false);
+            _camera.GetComponent<Animator>().Play("IntroAnimationPart2");
+            theEnd = true;
         }
     }
 }

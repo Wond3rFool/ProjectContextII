@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,15 +28,29 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Canvas canvas;
 
+    private TextMeshProUGUI text;
+    private string[] lines;
+    private float textSpeed = 0.09f;
+
+    private int index;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         inputAsset = GetComponent<PlayerInput>().actions;
         animator = GetComponent<Animator>();
-        canvas = GetComponentInChildren<Canvas>();
+        canvas = gameObject.transform.parent.GetComponentInChildren<Canvas>();
         player = inputAsset.FindActionMap("Player");
+
+
         //playerActionsAsset = new PlayerActionAsset();
         //animator = this.GetComponent<Animator>();
+    }
+
+    private void Start() 
+    {
+        canvas.gameObject.SetActive(false);
+        text = canvas.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void OnEnable()
@@ -122,11 +139,19 @@ public class PlayerController : MonoBehaviour
 
     private void NpcInteract(InputAction.CallbackContext obj) 
     {
-        float interactRange = 5f;
+        float interactRange = 7f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         if (canvas.gameObject.activeInHierarchy)
         {
-
+            if (text.text == lines[index])
+            {
+                NextLine();
+            }
+            else
+            {
+                StopAllCoroutines();
+                text.text = lines[index];
+            }
         }
         else 
         {
@@ -135,16 +160,23 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(collider);
                 if (collider.TryGetComponent(out NpcInteractable npc))
                 {
-                    npc.Interact();
+                    npc.Interact(canvas);
                 }
             }
         }
 
     }
+    public void FillArray(int length, string[] _lines) 
+    {
+        lines = new string[length];
+        lines = _lines;
+        index = 0;
+        StartDialogue();
+    }
 
     private void EnvironmentInteract(InputAction.CallbackContext obj) 
     {
-        float interactRange = 5f;
+        float interactRange = 7f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders)
         {
@@ -153,7 +185,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(gameObject.transform.parent.tag);
                 if (gameObject.transform.parent.tag == "Player1")
                 {
-
                     PlayerManagerHey.player1Interact = true;
                     npc.nearMe1 = true;
                 }
@@ -165,7 +196,34 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    void StartDialogue()
+    {
+        index = 0;
+        text.text= string.Empty;
+        StartCoroutine(TypeLine());
+    }
 
+    IEnumerator TypeLine()
+    {
+        foreach (char c in lines[index].ToCharArray())
+        {
+            text.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
+    }
+    void NextLine()
+    {
+        if (index < lines.Length - 1)
+        {
+            index++;
+            text.text = string.Empty;
+            StartCoroutine(TypeLine());
+        }
+        else
+        {
+            canvas.gameObject.SetActive(false);
+        }
+    }
     private bool IsGrounded()
     {
         Debug.Log("hello");

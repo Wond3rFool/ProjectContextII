@@ -196,7 +196,7 @@ public partial class @PlayerActionAsset : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2420baea-4760-4f7e-959e-61f4a8560d79"",
-                    ""path"": ""<Keyboard>/anyKey"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
