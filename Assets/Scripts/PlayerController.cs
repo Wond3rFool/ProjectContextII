@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         forceDirection = Vector3.zero;
 
         if (rb.velocity.y < 0f)
-            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+            rb.velocity -= Vector3.down * Physics.gravity.y * 15 * Time.fixedDeltaTime;
 
         Vector3 horizontalVelocity = rb.velocity;
         horizontalVelocity.y = 0;
