@@ -17642,6 +17642,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 150.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8939784209248322345, guid: 287bad8ca525f044489bae321fa1d243, type: 3}
+      propertyPath: lines.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939784209248322345, guid: 287bad8ca525f044489bae321fa1d243, type: 3}
+      propertyPath: lines.Array.data[9]
+      value: Optie B Wolven vallen toestaan in het natuurgebied
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939784209248322345, guid: 287bad8ca525f044489bae321fa1d243, type: 3}
+      propertyPath: lines.Array.data[10]
+      value: 'Optie C: Zelf de controle nemen door wolven te vangen en in hun eigen
+        gebied te stoppen'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 287bad8ca525f044489bae321fa1d243, type: 3}
 --- !u!1 &2600707620673669043
